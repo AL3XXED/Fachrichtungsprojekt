@@ -8,22 +8,22 @@ namespace Haustier_Tamagotchi
 {
     internal class Katze : Haustier
     {
-        public Katze(string name) : base(name) { }
+        public Katze(string tierName) : base(tierName) { }
 
         public override void sagHallo()
         {
-            Console.WriteLine($"Miauu! Ich bin {Name} die Katze");
+            Console.WriteLine($"Miauu! Ich bin {tierName} die Katze");
         }
 
         public void kratzen()
         {
-            Console.WriteLine($"{Name} spielt am Kratzbaum");
+            Console.WriteLine($"{tierName} spielt am Kratzbaum");
             Energie -= 15;
             Zufriedenheit += 5;
         }
         public void Schnurren()
         {
-            Console.WriteLine($"{Name} schnurrt zufrieden.");
+            Console.WriteLine($"{tierName} schnurrt zufrieden.");
             Zufriedenheit += 5;
         }
     }

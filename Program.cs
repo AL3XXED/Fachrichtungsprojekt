@@ -2,19 +2,20 @@
 {
     internal class Program
     {
+    
         static void Main(string[] args)
         {
             Spielmechanik neuesSpiel = new Spielmechanik();
             Haustier neuesTier = new Haustier("name");
+            Hund neuerhund = new Hund("name");
 
-
-            neuesSpiel.Begruessung(); 
-            neuesSpiel.menueTier();
-            neuesSpiel.tierName();
-            neuesSpiel.hauptmenu();
+            neuesSpiel.Begruessung();
+            neuerhund.Bild();
+            neuesSpiel.ErstelleHaustier();
             neuesTier.sagHallo();
-            neuesTier.Spielen();
+            neuesSpiel.Hauptmenu();
 
+            //MyIIMG("<Bildname.png>");
         }
     }
 }

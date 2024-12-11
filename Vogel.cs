@@ -8,22 +8,25 @@ namespace Haustier_Tamagotchi
 {
     internal class Vogel : Haustier
     {
-        public Vogel(string name) : base(name) { }
+        public Vogel(string tierName) : base(tierName) { }
     
             public override void sagHallo()
         {
-            Console.WriteLine($"Allo ! Ich bin {Name} dein Papagei");
+            Console.WriteLine($"Allo ! Ich bin {tierName} dein Papagei");
+            Console.ReadKey();
         }
 
-        public void fliegen()
+        public override void Spazieren()
         {
-            Console.WriteLine($"{Name} fliegt eine Runde um dich herum");
+            Console.WriteLine($"{tierName} fliegt eine Runde um dich herum");
+            Console.ReadKey();
             Energie -= 15;
             Zufriedenheit += 5;
         }
         public void Singen()
         {
-            Console.WriteLine($"{Name} singt ein schönes Lied.");
+            Console.WriteLine($"{tierName} singt ein schönes Lied.");
+            Console.ReadKey();
             Energie -= 10;
             Zufriedenheit += 15;
         }

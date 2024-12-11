@@ -3,145 +3,204 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Haustier_Tamagotchi
 {
     internal class Spielmechanik
     {
-        private string playerName;
+        private Haustier meinTier;
+        private string[] haustiertypAuswahl = { "Hund", "Katze", "Maus", "Vogel" };
+        private int auswahlIndex = 0;
         public void Begruessung()
         {
             Console.WriteLine("====================================");
             Console.WriteLine("Willkommen bei Haustier-Tamagotchi!");
             Console.WriteLine("====================================");
-            Console.WriteLine();
             Console.Write("Bitte gib deinen Namen ein: ");
-            string playerName = Console.ReadLine();
+            string playerName = Console.ReadLine().ToUpper();
 
             Console.Clear();
             Console.WriteLine($"Hallo {playerName}! Lass uns dein virtuelles Haustier erstellen.");
         }
 
-        public void menueTier()
+        public void ErstelleHaustier()
         {
-            string[] menue1 = { "Hund", "Katze", "Maus", "Vogel" };
-            int tierIndex = 0;
-            bool weiter = true;
-            while (weiter)
+            int haustierTyp;
+            string tierName;
+            bool weiter = false;
+
+            do
             {
-                Console.Clear();
                 Console.WriteLine("Wähle dein Haustier aus:");
+                haustierTyp = NavigationsMenu(haustiertypAuswahl);
 
-                for (int i = 0; i < menue1.Length; i++)
-                {
-                    if (i == tierIndex)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"> {menue1[i]} <");
-                        Console.ResetColor();
-                    }
-                    else
-                    {
-                        Console.WriteLine($"   {menue1[i]}   ");
-                    }
-                }
-                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+                Console.WriteLine($"Du hast {haustiertypAuswahl[haustierTyp]} gewählt. Wie soll dein Haustier heißen?");
+                tierName = Console.ReadLine().Trim();
 
-                switch (keyInfo.Key)
+                Console.WriteLine($"Du möchtest also ein(e/en) {haustiertypAuswahl[haustierTyp]} namens {tierName}. Ist das korrekt? ");
+                string[] bestatigungmenuAuswahl = { "Ja", "Nein, ich möchte etwas ändern" };
+                int bestatigungsAuswahl = NavigationsMenu(bestatigungmenuAuswahl);
+
+                weiter = (bestatigungsAuswahl == 0);
+            } while (!weiter);
+
+            switch (haustierTyp)
+            {
+                case 0:
+                    meinTier = new Hund(tierName);
+                    break;
+
+                case 1:
+                    meinTier = new Katze(tierName);
+                    break;
+
+                case 2:
+                    meinTier = new Maus(tierName);
+                    break;
+
+                case 3:
+                    meinTier = new Vogel(tierName);
+                    break;
+            }
+            Console.Clear();
+            Console.WriteLine($"Großartig! Dein neues Haustier ist ein(e) {haustiertypAuswahl[haustierTyp]} namens {tierName}.");
+            Console.WriteLine("Drücke eine Taste, um fortzufahren...");
+            Console.ReadKey();
+        }
+        private int NavigationsMenu(string[] menuItems)         //Fügt die benutzung der Pfeiltasten in der Menüausgabe ein
+        {
+            auswahlIndex = 0;
+            while (true)
+            {
+                DisplayMenu(menuItems);
+                switch (Console.ReadKey(true).Key)
                 {
                     case ConsoleKey.UpArrow:
-                        tierIndex = (tierIndex - 1 + menue1.Length) % menue1.Length;
+                        auswahlIndex = (auswahlIndex - 1 + menuItems.Length) % menuItems.Length;
                         break;
-
                     case ConsoleKey.DownArrow:
-                        tierIndex = (tierIndex + 1) % menue1.Length;
+                        auswahlIndex = (auswahlIndex + 1) % menuItems.Length;
                         break;
-
                     case ConsoleKey.Enter:
-                        if (tierIndex == menue1.Length - 1)
-                            return;
-
-                        Console.WriteLine($"\nSie haben {menue1[tierIndex]} ausgewählt.");
-                        Console.ReadKey(true);
-                        weiter = false;
-                        break;
+                        return auswahlIndex;
                 }
-                Console.Clear();
             }
         }
-        public void tierName()
+
+        private void DisplayMenu(string[] menuItems)   //Setzt das aktuell gewälte in > < zur optischen Übersicht
         {
-            bool wiederholen = true;
-            while (wiederholen)
+            Console.Clear();
+            Console.WriteLine("\nWähle eine Aktion:");
+
+            for (int i = 0; i < menuItems.Length; i++)
             {
-                Console.WriteLine("Bitte gib deinem neuem Haustier einen Namen:");
-                string name = Console.ReadLine();
-                Console.WriteLine($"Ist der Name: {name} richtig ? (Ja/Nein)");
-                string eingabe = Console.ReadLine().ToLower().Trim();
-                if (eingabe == "j" || eingabe == "ja")
+                if (i == auswahlIndex)
                 {
-                    Console.WriteLine($"{name} ist ein sehr schöner Name.");
-                    wiederholen = false;
-                }
-                else if (eingabe == "n" || eingabe == "nein")
-                {
-                    Console.WriteLine("Okay dann lass es uns nocheinmal versuchen.");
-                    wiederholen = true ;
+                    Console.WriteLine($"> {menuItems[i]} <");
                 }
                 else
                 {
-                    Console.Clear();
-                    Console.WriteLine("Eingabe ungültig!");
+                    Console.WriteLine(menuItems[i]);
                 }
+                
+            }
+        }
+        public void Hauptmenu()
+        {
+            string[] hauptmenuAnzeige = { "Aktivitäten", "Essen", "Ruhe", "Status", "Beenden" };
+            while (true)
+            {
+                int auswahl = NavigationsMenu(hauptmenuAnzeige);
+                switch (auswahl)
+                {
+                    case 0:                             // Aktivitäten
+                        AktivitatenMenu();
+                        break;
+                    case 1:                             // Essen
+                        EssenMenu();
+                        break;
+                    case 2:                             // Ruhe
+                        meinTier.Ruhen();
+                        break;
+                    case 3:                            // Status
+                        Statusmenu();
+                        break;
+                    case 4:                            // Beenden
+                        return;
+                }
+            }
+        }
+
+        private void AktivitatenMenu()
+        {
+            string[] aktivitatsmenuAnzeige = { "Spazieren", "Streicheln", "Spielen", "Trainieren", "Hygiene", "zurück" };
+            int auswahl = NavigationsMenu(aktivitatsmenuAnzeige);
+            switch (auswahl)
+            {
+                case 0:                         // Spazieren
+                    meinTier.Spazieren();
+                    break;
+                case 1:                         // Streicheln
+                    meinTier.Streicheln();
+                    break;
+                case 2:                         // Spielen
+                    meinTier.Spielen();
+                    break;
+                case 3:                         // Trainieren
+                    meinTier.Trainieren();
+                    break;
+                case 4:                         // Hygiene
+                    meinTier.Hygiene();
+                    break;
+                case 5:                         // Zurück
+                    return;
             }
 
         }
-        public void hauptmenu()
+        private void EssenMenu()
         {
-            string[] menuauswahl = { "Aktivitäten", "Füttern", "Ausruhen", "Status", "Exit" };
-            int auswahlIndex = 0;
-
-            ConsoleKey key;
-            do
+            string[] essenmenuAnzeige = { "Leckerli", "Snack", "Mahlzeit", "zurück" };
+            int auswahl = NavigationsMenu(essenmenuAnzeige);
+            switch (auswahl)
             {
-                Console.Clear();
-                for (int i = 0; i < menuauswahl.Length; i++)
-                {
-                    if (i == auswahlIndex)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"> {menuauswahl[i]} <");
-                        Console.ResetColor();
-                    }
-                    else
-                    {
-                        Console.WriteLine($"  {menuauswahl[i]}");
-                    }
-                }
+                case 0:                     //Leckerli
+                    meinTier.Futtern(10);
+                    break;
 
-                key = Console.ReadKey(true).Key;
+                case 1:                     //Snack
+                    meinTier.Futtern(25);
+                    break;
 
-                switch (key)
-                {
-                    case ConsoleKey.UpArrow:
-                        auswahlIndex = (auswahlIndex == 0) ? menuauswahl.Length - 1 : auswahlIndex - 1;
-                        break;
-                    case ConsoleKey.DownArrow:
-                        auswahlIndex = (auswahlIndex == menuauswahl.Length - 1) ? 0 : auswahlIndex + 1;
-                        break;
-                    case ConsoleKey.Enter:
-                        Console.Clear();
-                        Console.WriteLine($"Du hast {menuauswahl[auswahlIndex]} ausgewählt");
-                        if (menuauswahl[auswahlIndex] == "Exit")
-                        {
-                            return;
-                        }
-                        Console.ReadKey();
-                        break;
-                }
-            } while (key != ConsoleKey.Escape);
+                case 2:                     //Mahlzeit
+                    meinTier.Futtern(50);
+                    break;
+                case 3:
+                    return;
+            }
         }
+        private void Statusmenu()
+        {
+            string[] statusmenuAnzeige = { "Status", "Tipps", "zurück" };
+            int auswahl = NavigationsMenu(statusmenuAnzeige);
+            switch (auswahl)
+            {
+                case 0:
+                    Console.Clear();
+                    Console.WriteLine($"{meinTier.tierName}'s Status:");
+                    Console.WriteLine($"Gesundheit: {meinTier.Gesundheit}\nHunger: {meinTier.Hunger}\nEnergie: {meinTier.Energie}\nZufriedenheit: {meinTier.Zufriedenheit}");
+                    Console.ReadKey();
+                    return; 
 
+                case 1:
+                    Console.Clear();
+                    Console.WriteLine("<Tipps einfügen>");                      //String-Array mit Tipps erstellen!
+                    Console.ReadKey();
+                    return;
+                case 2:
+                    return;
+            }
 
+        }
     }
 }
