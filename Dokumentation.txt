@@ -1,0 +1,7 @@
+﻿Tag 1
+- Projektantrag gestellt
+- Neue Projektmappe erstellt
+- Main.cs und Klassen + Kindklassen erstellt
+-Angefangen ein Menü aufzubauen
+
+Probleme: Menüführung, Übergabe von Name an Kindklasse, Ineffizient 
