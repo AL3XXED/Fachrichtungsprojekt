@@ -15,20 +15,24 @@ namespace Haustier_Tamagotchi
         private string[] haustiertypAuswahl = { "Hund", "Katze", "Maus", "Vogel" };
         private int auswahlIndex = 0;
         private string tierName;
+        public static string text = " ";
+        public static string uberschrift = (" \t\t  _______ _               _______                                _       _     _ \r\n\t\t |__   __(_)             |__   __|                              | |     | |   (_)\r\n\t\t    | |   _  ___ _ __ ______| | __ _ _ __ ___   __ _  __ _  ___ | |_ ___| |__  _ \r\n\t\t    | |  | |/ _ \\ '__|______| |/ _` | '_ ` _ \\ / _` |/ _` |/ _ \\| __/ __| '_ \\| |\r\n\t\t    | |  | |  __/ |         | | (_| | | | | | | (_| | (_| | (_) | || (__| | | | |\r\n\t\t    |_|  |_|\\___|_|         |_|\\__,_|_| |_| |_|\\__,_|\\__, |\\___/ \\__\\___|_| |_|_|\r\n                         \t\t                              __/ |                      \r\n                                  \t\t                     |___/                       \r\n========================================================================================================================");
 
         internal Haustier MeinTier { get => meinTier; set => meinTier = value; }
         public string TierName { get => tierName; set => tierName = value; }
 
         public void Begruessung()
         {
-            Console.WriteLine("====================================");
-            Console.WriteLine("Willkommen bei Haustier-Tamagotchi!");
-            Console.WriteLine("====================================");
-            Console.Write("Bitte gib deinen Namen ein: ");
-            string playerName = Console.ReadLine().ToUpper();
-
+           Console.WriteLine(Spielmechanik.uberschrift);
+            text = "Bitte gib deinen Namen ein:\n";
+            Zentriert();
+            Console.WriteLine(text);
+            Zentriert();
+            string spielerName = Console.ReadLine().ToUpper();
+            text = $"Hallo {spielerName}! Lass uns dein virtuelles Haustier erstellen.";
+            Zentriert();
+            Console.Write(text);
             Console.Clear();
-            Console.WriteLine($"Hallo {playerName}! Lass uns dein virtuelles Haustier erstellen.");
         }
 
         public void ErstelleHaustier()
@@ -39,14 +43,24 @@ namespace Haustier_Tamagotchi
 
             do
             {
-                string[] anzeigeText = { "Wähle dein Haustier aus:" };
+                Zentriert();
+                Spielmechanik.text = "Wähle dein Haustier aus:\n";
+                Zentriert();
                 haustierTyp = NavigationsMenu(haustiertypAuswahl);
-
-                Console.WriteLine($"Du hast {haustiertypAuswahl[haustierTyp]} gewählt. Wie soll dein Haustier heißen?");
+                Console.Clear();
+                Zentriert();
+                text = $"Du hast {haustiertypAuswahl[haustierTyp]} gewählt.";
+                Console.WriteLine(text);
+                Zentriert();
+                text = "Wie soll dein Haustier heißen?:";
+                Console.WriteLine(text);
                 tierName = Console.ReadLine().Trim();
 
-                Console.WriteLine($"Du möchtest also ein(e/en) {haustiertypAuswahl[haustierTyp]} namens {tierName}. Ist das korrekt? ");
-                string[] bestatigungmenuAuswahl = { "Ja", "Nein, ich möchte etwas ändern" };
+                text = $"Du möchtest also ein(e/en) {haustiertypAuswahl[haustierTyp]} namens {tierName}. Ist das korrekt? ";
+                Zentriert();    
+                Console.WriteLine(text);
+                string[] bestatigungmenuAuswahl = { "             Ja              ", "Nein, ich möchte etwas ändern" };
+                Spielmechanik.text = "Bestätige deine Auswahl:\n";
                 int bestatigungsAuswahl = NavigationsMenu(bestatigungmenuAuswahl);
 
                 weiter = (bestatigungsAuswahl == 0);
@@ -71,9 +85,13 @@ namespace Haustier_Tamagotchi
                     break;
             }
             Console.Clear();
-            Console.WriteLine($"Großartig! Dein neues Haustier ist ein(e) {haustiertypAuswahl[haustierTyp]} namens {tierName}.\n");
+            Zentriert();
+            text = $"Großartig! Dein neues Haustier ist ein(e) {haustiertypAuswahl[haustierTyp]} namens {tierName}.\n";
+            Console.WriteLine(text);
+            Zentriert();
             meinTier.sagHallo();
-            Console.WriteLine("\n\nDrücke eine Taste, um fortzufahren...");
+            text = "Drücke eine beliebige Taste um fortzufahren ...";
+            Console.WriteLine(text);
             Console.ReadKey();
         }
         private int NavigationsMenu(string[] menuItems)         //Fügt die benutzung der Pfeiltasten in der Menüausgabe ein
@@ -99,24 +117,32 @@ namespace Haustier_Tamagotchi
         private void DisplayMenu(string[] menuItems)   //Setzt das aktuell gewälte in > < zur optischen Übersicht
         {
             Console.Clear();
+            Console.WriteLine(Spielmechanik.uberschrift);
+            Zentriert();
+            Console.WriteLine(Spielmechanik.text);
             for (int i = 0; i < menuItems.Length; i++)
             {
+                Zentriert();
                 if (i == auswahlIndex)
                 {
                     Console.WriteLine($"> {menuItems[i]} <");
                 }
                 else
                 {
-                    Console.WriteLine(menuItems[i]);
+                    Console.WriteLine($"  {menuItems[i]} ");
                 }
 
             }
         }
         public void Hauptmenu()
         {
+            Console.WriteLine(Spielmechanik.uberschrift);
+            Zentriert();
+            Spielmechanik.text = "~ Hauptmenü ~\n";
             string[] hauptmenuAnzeige = { "Aktivitäten", "Essen", "Ruhe", "Status", "Beenden" };
             while (true)
             {
+                Zentriert();
                 int auswahl = NavigationsMenu(hauptmenuAnzeige);
                 switch (auswahl)
                 {
@@ -140,7 +166,10 @@ namespace Haustier_Tamagotchi
 
         private void AktivitatenMenu()
         {
+            Console.WriteLine(Spielmechanik.uberschrift);
+            Zentriert();
             string[] aktivitatsmenuAnzeige = { "Spazieren", "Streicheln", "Spielen", "Trainieren", "Hygiene", "zurück" };
+            Spielmechanik.text = "~ Aktivitätsmenü ~";
             int auswahl = NavigationsMenu(aktivitatsmenuAnzeige);
             switch (auswahl)
             {
@@ -166,7 +195,10 @@ namespace Haustier_Tamagotchi
         }
         private void EssenMenu()
         {
+            Console.WriteLine(Spielmechanik.uberschrift);
+            Zentriert();
             string[] essenmenuAnzeige = { "Leckerli", "Snack", "Mahlzeit", "zurück" };
+            Spielmechanik.text = "~ Essensmenü ~";
             int auswahl = NavigationsMenu(essenmenuAnzeige);
             switch (auswahl)
             {
@@ -187,7 +219,10 @@ namespace Haustier_Tamagotchi
         }
         private void Statusmenu()
         {
+            Console.WriteLine(Spielmechanik.uberschrift);
+            Zentriert();
             string[] statusmenuAnzeige = { "Status", "Tipps", "zurück" };
+            Spielmechanik.text = " ~Statusmenü ~";
             int auswahl = NavigationsMenu(statusmenuAnzeige);
             switch (auswahl)
             {
@@ -214,10 +249,10 @@ namespace Haustier_Tamagotchi
             int positionUnten = Console.WindowHeight - 2;
 
             Console.CursorVisible = false;
-            Console.SetCursorPosition(0, positionUnten);
+            Console.SetCursorPosition(32, positionUnten);
             for (int i = 0; i <= schritte; i++)
             {
-                Console.SetCursorPosition(0, positionUnten);
+                Console.SetCursorPosition(32, positionUnten);
                 float prozent = (float)i / schritte;
                 int fortschritt = (int)(breite * prozent);
 
@@ -235,6 +270,12 @@ namespace Haustier_Tamagotchi
             }
             Console.CursorVisible = true;
             Console.Clear();
+        }
+        public static void Zentriert()
+        {
+            int fensterbreite = Console.WindowWidth;
+            int startpunkt = (fensterbreite - text.Length) / 2;
+            Console.SetCursorPosition(startpunkt, Console.CursorTop);
         }
     }
 }

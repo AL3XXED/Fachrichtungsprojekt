@@ -12,3 +12,14 @@ Tag 2
 -KI genutzt: Menü wiederverwendtbar machen (Baukastensystem)
 
 Problem: virtual und Override, Verhindern das keine eingabe bei Name gemacht werden kann
+-------------------------------------------------------------------------------------------------
+Tag 3
+-Ladebalken integriert
+-Tiername an andere Klassen übergeben
+-Implementierung eines statischen Felds: text der je nach Methode ein anderen Text zeigt.
+-Methode Zentrieren erstellt
+-Angefangen Textausgaben zu Zentrieren
+-Überlegungen zum Polymorphismus zu Kindklassen-Aktivitäten
+
+Probleme: aktuelle Zentrier-Methode ist nicht auf alle ausgaben anwendbar
+------------------------------------------------------------------------------------------------
