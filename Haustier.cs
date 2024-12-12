@@ -24,18 +24,20 @@ namespace Haustier_Tamagotchi
         }
         public virtual void sagHallo()
         {
-            Console.WriteLine($"Hallo, ich bin {tierName}!");
+            Console.WriteLine($"Hallo, ich bin {tierName}!\nDein neuer Besterfreund <3");
         }
 
         public virtual void Spielen()
         {
             Console.WriteLine($"{tierName} spielt.");
+            Spielmechanik.Ladebalken(100, 100);
             Energie -= 10;
             Zufriedenheit += 15;
         }
         public virtual void Spazieren()
         {
             Console.WriteLine($"{tierName} geht spazieren.");
+            Spielmechanik.Ladebalken(175, 175);
             Energie -= 10;
             Zufriedenheit += 15;
             Hunger += 10;
@@ -43,6 +45,7 @@ namespace Haustier_Tamagotchi
         public virtual void Streicheln()
         {
             Console.WriteLine($"{tierName} wird gestreichelt.");
+            Spielmechanik.Ladebalken(175, 175);
             Zufriedenheit += 10;
             Energie -= 5;
         }
@@ -50,6 +53,7 @@ namespace Haustier_Tamagotchi
         public virtual void Trainieren()
         {
             Console.WriteLine($"{tierName} trainiert.");
+            Spielmechanik.Ladebalken(175, 175);
             Energie -= 15;
             Zufriedenheit += 10;
             Hunger += 10;
@@ -58,6 +62,7 @@ namespace Haustier_Tamagotchi
         public virtual void Hygiene()
         {
             Console.WriteLine($"{tierName} wird gepflegt.");
+
             Gesundheit += 10;
             Zufriedenheit += 5;
         }
@@ -65,6 +70,7 @@ namespace Haustier_Tamagotchi
         public virtual void Ruhen()
         {
             Console.WriteLine($"{tierName} ruht sich aus.");
+            Spielmechanik.Ladebalken(500, 1500);
             Energie = Math.Min(120, Energie + 30);
             Gesundheit += 5;
             Zufriedenheit += 5;
@@ -73,6 +79,7 @@ namespace Haustier_Tamagotchi
         public virtual void Futtern(int menge)
         {
             Console.WriteLine($"{tierName} frisst.");
+            Spielmechanik.Ladebalken(150, 100);
             Hunger = 0;
             Zufriedenheit += menge / 2;
         }

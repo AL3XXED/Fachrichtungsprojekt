@@ -9,5 +9,6 @@ Probleme: Menüführung, Übergabe von Name an Kindklasse, Ineffizient
 Tag 2
 -Erklärung für Bitmap intergration
 -Menüführung überarbeitet und wiederverwendbar gemacht
+-KI genutzt: Menü wiederverwendtbar machen (Baukastensystem)
 
 Problem: virtual und Override, Verhindern das keine eingabe bei Name gemacht werden kann

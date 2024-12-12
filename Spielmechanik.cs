@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -12,6 +14,11 @@ namespace Haustier_Tamagotchi
         private Haustier meinTier;
         private string[] haustiertypAuswahl = { "Hund", "Katze", "Maus", "Vogel" };
         private int auswahlIndex = 0;
+        private string tierName;
+
+        internal Haustier MeinTier { get => meinTier; set => meinTier = value; }
+        public string TierName { get => tierName; set => tierName = value; }
+
         public void Begruessung()
         {
             Console.WriteLine("====================================");
@@ -27,12 +34,12 @@ namespace Haustier_Tamagotchi
         public void ErstelleHaustier()
         {
             int haustierTyp;
-            string tierName;
+            ;
             bool weiter = false;
 
             do
             {
-                Console.WriteLine("Wähle dein Haustier aus:");
+                string[] anzeigeText = { "Wähle dein Haustier aus:" };
                 haustierTyp = NavigationsMenu(haustiertypAuswahl);
 
                 Console.WriteLine($"Du hast {haustiertypAuswahl[haustierTyp]} gewählt. Wie soll dein Haustier heißen?");
@@ -64,8 +71,9 @@ namespace Haustier_Tamagotchi
                     break;
             }
             Console.Clear();
-            Console.WriteLine($"Großartig! Dein neues Haustier ist ein(e) {haustiertypAuswahl[haustierTyp]} namens {tierName}.");
-            Console.WriteLine("Drücke eine Taste, um fortzufahren...");
+            Console.WriteLine($"Großartig! Dein neues Haustier ist ein(e) {haustiertypAuswahl[haustierTyp]} namens {tierName}.\n");
+            meinTier.sagHallo();
+            Console.WriteLine("\n\nDrücke eine Taste, um fortzufahren...");
             Console.ReadKey();
         }
         private int NavigationsMenu(string[] menuItems)         //Fügt die benutzung der Pfeiltasten in der Menüausgabe ein
@@ -91,8 +99,6 @@ namespace Haustier_Tamagotchi
         private void DisplayMenu(string[] menuItems)   //Setzt das aktuell gewälte in > < zur optischen Übersicht
         {
             Console.Clear();
-            Console.WriteLine("\nWähle eine Aktion:");
-
             for (int i = 0; i < menuItems.Length; i++)
             {
                 if (i == auswahlIndex)
@@ -103,7 +109,7 @@ namespace Haustier_Tamagotchi
                 {
                     Console.WriteLine(menuItems[i]);
                 }
-                
+
             }
         }
         public void Hauptmenu()
@@ -190,7 +196,7 @@ namespace Haustier_Tamagotchi
                     Console.WriteLine($"{meinTier.tierName}'s Status:");
                     Console.WriteLine($"Gesundheit: {meinTier.Gesundheit}\nHunger: {meinTier.Hunger}\nEnergie: {meinTier.Energie}\nZufriedenheit: {meinTier.Zufriedenheit}");
                     Console.ReadKey();
-                    return; 
+                    return;
 
                 case 1:
                     Console.Clear();
@@ -201,6 +207,34 @@ namespace Haustier_Tamagotchi
                     return;
             }
 
+        }
+        public static void Ladebalken(int schritte, int dauer)
+        {
+            int breite = Console.WindowWidth - 70;
+            int positionUnten = Console.WindowHeight - 2;
+
+            Console.CursorVisible = false;
+            Console.SetCursorPosition(0, positionUnten);
+            for (int i = 0; i <= schritte; i++)
+            {
+                Console.SetCursorPosition(0, positionUnten);
+                float prozent = (float)i / schritte;
+                int fortschritt = (int)(breite * prozent);
+
+                Console.Write("[");
+                Console.BackgroundColor = ConsoleColor.Gray;
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.Write(new string(' ', fortschritt));
+                Console.ResetColor();
+                Console.Write(new string(' ', breite - fortschritt));
+                Console.Write("]");
+                Console.Write($" {(int)(prozent * 100)}%");
+
+                Thread.Sleep(50);
+            }
+            Console.CursorVisible = true;
+            Console.Clear();
         }
     }
 }

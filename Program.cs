@@ -10,7 +10,6 @@
             Hund neuerhund = new Hund("name");
 
             neuesSpiel.Begruessung();
-            neuerhund.Bild();
             neuesSpiel.ErstelleHaustier();
             neuesTier.sagHallo();
             neuesSpiel.Hauptmenu();
