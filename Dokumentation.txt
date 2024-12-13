@@ -23,3 +23,6 @@ Tag 3
 
 Probleme: aktuelle Zentrier-Methode ist nicht auf alle ausgaben anwendbar
 ------------------------------------------------------------------------------------------------
+Tag 4
+-Zentrier-Methode überarbeitet und implementiert
+- Ladebalken in Override mit rein nehmen !

@@ -12,44 +12,47 @@ namespace Haustier_Tamagotchi
     
             public override void sagHallo()
         {
-            Console.WriteLine($"Pipps! Ich bin {tierName} deine kleine Süße Maus");
+            Spielmechanik.ZentrierteAusgabe($"Pipps! Ich bin {tierName} deine kleine Süße Maus");
         }
-
+        public override string[] Aktivitaten()
+        {
+            return ["  Spazieren  ", "  Streicheln ", "   Spielen   ", "  Trainieren ", "   Hygiene   ", "zurück"];
+        }
         public void klettern()
         {
-            Console.WriteLine($"{tierName} klettert an dir hoch.");
+            Spielmechanik.ZentrierteAusgabe($"{tierName} klettert an dir hoch.");
             Energie -= 15;
             Zufriedenheit += 5;
         }
-        public virtual void Trainieren()
+        public override void Trainieren()
         {
-            Console.WriteLine($"{tierName} trainiert.");
+            Spielmechanik.ZentrierteAusgabe($"{tierName} trainiert.");
             Spielmechanik.Ladebalken(175, 175);
             Energie -= 15;
             Zufriedenheit += 10;
             Hunger += 10;
         }
 
-        public virtual void Hygiene()
+        public override void Hygiene()
         {
-            Console.WriteLine($"{tierName} wird gepflegt.");
+            Spielmechanik.ZentrierteAusgabe($"{tierName} wird gepflegt.");
 
             Gesundheit += 10;
             Zufriedenheit += 5;
         }
 
-        public virtual void Ruhen()
+        public override void Ruhen()
         {
-            Console.WriteLine($"{tierName} ruht sich aus.");
+            Spielmechanik.ZentrierteAusgabe($"{tierName} ruht sich aus.");
             Spielmechanik.Ladebalken(500, 1500);
             Energie = Math.Min(120, Energie + 30);
             Gesundheit += 5;
             Zufriedenheit += 5;
         }
 
-        public virtual void Futtern(int menge)
+        public override void Futtern(int menge)
         {
-            Console.WriteLine($"{tierName} frisst.");
+            Spielmechanik.ZentrierteAusgabe($"{tierName} frisst.");
             Spielmechanik.Ladebalken(150, 100);
             Hunger = 0;
             Zufriedenheit += menge / 2;
