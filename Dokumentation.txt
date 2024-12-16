@@ -28,6 +28,7 @@ Tag 4
 -Override in Kindklassen erstellt -> Individuelle unterscheidung felt noch
 
 Probleme : Flüchtichkeitsfehler
-To-Do:
--Klasse Menüführung erstellen !
-- Ladebalken in Override mit rein nehmen !
+------------------------------------------------------------------------------------------------
+Tag 5
+-Klasse Menüführung erstellt und Spielmachanik aufgeteilt -> Menüelemente in Menüführung (Anfängliche Schwierichkeiten da ErstelleHaustier nicht mit in MF > meinTier/tierAuswahl ist null)
+-anfang Werte zuzuordnen und Maximal Werte festzulegen -> Levelsystem ?

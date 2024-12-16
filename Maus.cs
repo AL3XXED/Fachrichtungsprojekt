@@ -54,8 +54,6 @@ namespace Haustier_Tamagotchi
         {
             Spielmechanik.ZentrierteAusgabe($"{tierName} frisst.");
             Spielmechanik.Ladebalken(150, 100);
-            Hunger = 0;
-            Zufriedenheit += menge / 2;
         }
     }
 }

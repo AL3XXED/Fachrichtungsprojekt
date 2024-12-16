@@ -27,8 +27,9 @@ namespace Haustier_Tamagotchi
                 Spielmechanik.ZentrierteAusgabe($"Du hast {haustiertypAuswahl[haustierTyp]} gewählt.");
                 Spielmechanik.ZentrierteAusgabe("Wie soll dein Haustier heißen?:");
                 Console.SetCursorPosition(57, 4);
+                Console.CursorVisible = true;
                 tierName = Console.ReadLine().Trim();
-
+                Console.CursorVisible = false;
                 Spielmechanik.ZentrierteAusgabe($"Du möchtest also ein(e/en) {haustiertypAuswahl[haustierTyp]} namens {tierName}. Ist das korrekt? ");
                 string[] bestatigungmenuAuswahl = { "             Ja              ", "Nein, ich möchte etwas ändern" };
                 Spielmechanik.text = ("Bestätige deine Auswahl:\n");
@@ -84,6 +85,7 @@ namespace Haustier_Tamagotchi
 
         private void DisplayMenu(string[] menuItems)   //Setzt das aktuell gewälte in > < zur optischen Übersicht
         {
+            Console.CursorVisible = false;
             Console.Clear();
             Spielmechanik.ZentrierteAusgabe(Spielmechanik.text);
             for (int i = 0; i < menuItems.Length; i++)
@@ -162,15 +164,22 @@ namespace Haustier_Tamagotchi
             switch (auswahl)
             {
                 case 0:                     //Leckerli
-                    meinTier.Futtern(10);
+                    if (meinTier.Hunger < meinTier.Hungermax)
+                    { meinTier.Futtern(5);meinTier.Zufriedenheit++; }
+                    else
+                    { Spielmechanik.ZentrierteAusgabe($"{meinTier.tierName} hat kein Hunger."); }
                     break;
-
                 case 1:                     //Snack
-                    meinTier.Futtern(25);
+                    if (meinTier.Hunger < meinTier.Hungermax)
+                    { meinTier.Futtern(20); meinTier.Zufriedenheit++; }
+                    else
+                    { Spielmechanik.ZentrierteAusgabe($"{meinTier.tierName} hat kein Hunger."); }
                     break;
-
                 case 2:                     //Mahlzeit
-                    meinTier.Futtern(50);
+                    if (meinTier.Hunger < meinTier.Hungermax)
+                    { meinTier.Futtern(35); meinTier.Zufriedenheit++; }
+                    else
+                    { Spielmechanik.ZentrierteAusgabe($"{meinTier.tierName} hat kein Hunger."); }
                     break;
                 case 3:
                     return;
@@ -186,10 +195,11 @@ namespace Haustier_Tamagotchi
                 case 0:
                     Console.Clear();
                     Spielmechanik.ZentrierteAusgabe($"{meinTier.tierName}'s Status:\n");
-                    Spielmechanik.ZentrierteAusgabe($"Gesundheit: {meinTier.Gesundheit}");
-                    Spielmechanik.ZentrierteAusgabe($"Hunger: {meinTier.Hunger}");
-                    Spielmechanik.ZentrierteAusgabe($"Energie: {meinTier.Energie}");
-                    Spielmechanik.ZentrierteAusgabe($"Zufriedenheit: {meinTier.Zufriedenheit}");
+                    Spielmechanik.ZentrierteAusgabe($"Level: {meinTier.Level}");
+                    Spielmechanik.ZentrierteAusgabe($"Gesundheit: {meinTier.Gesundheit} / {meinTier.Gesundheitmax}");
+                    Spielmechanik.ZentrierteAusgabe($"Hunger: {meinTier.Hunger} / {meinTier.Hungermax}");
+                    Spielmechanik.ZentrierteAusgabe($"Energie: {meinTier.Energie} / {meinTier.Energiemax}");
+                    Spielmechanik.ZentrierteAusgabe($"Zufriedenheit: {meinTier.Zufriedenheit} / {meinTier.Zufriedenheitmax}");
                     Console.ReadKey();
                     return;
 
