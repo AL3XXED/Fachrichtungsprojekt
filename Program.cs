@@ -8,11 +8,12 @@
             Spielmechanik neuesSpiel = new Spielmechanik();
             Haustier neuesTier = new Haustier("name");
             Hund neuerhund = new Hund("name");
+            Menüführung menu = new Menüführung();
 
             neuesSpiel.Begruessung();
-            neuesSpiel.ErstelleHaustier();
+            menu.ErstelleHaustier();
             neuesTier.sagHallo();
-            neuesSpiel.Hauptmenu();
+            menu.Hauptmenu();
 
             //MyIIMG("<Bildname.png>");
         }

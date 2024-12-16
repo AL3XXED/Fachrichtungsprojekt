@@ -25,4 +25,9 @@ Probleme: aktuelle Zentrier-Methode ist nicht auf alle ausgaben anwendbar
 ------------------------------------------------------------------------------------------------
 Tag 4
 -Zentrier-Methode überarbeitet und implementiert
+-Override in Kindklassen erstellt -> Individuelle unterscheidung felt noch
+
+Probleme : Flüchtichkeitsfehler
+To-Do:
+-Klasse Menüführung erstellen !
 - Ladebalken in Override mit rein nehmen !
