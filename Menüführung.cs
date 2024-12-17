@@ -8,7 +8,7 @@ namespace Haustier_Tamagotchi
 {
     internal class Menüführung
     {
-        private Haustier meinTier;
+        public static Haustier meinTier;
         private string[] haustiertypAuswahl = { "Hund", "Katze", "Maus", "Vogel" };
         private int auswahlIndex = 0;
         private string tierName;

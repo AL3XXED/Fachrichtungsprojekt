@@ -16,68 +16,101 @@ namespace Haustier_Tamagotchi
         }
         public override string[] Aktivitaten()
         {
-            return ["  Gassi gehen  ", "  Streicheln ", "   Spielen   ", "  Trainieren ", "   Hygiene   ", "zurück"];
+            return ["  Gassi  ", "  Streicheln ", "   Spielen   ", "  Trainieren ", "   Hygiene   ", "zurück"];
+        }
+
+        public override void Spielen()
+        {
+            if (Bedingungen.HatGenugEnergie(5))
+            {
+                Spielmechanik.ZentrierteAusgabe($"{tierName} spielt.");
+                Spielmechanik.Ladebalken(100, 100);
+                Bedingungen.VerbrauchEnergie(5);
+                Bedingungen.ErhoeheZufriedenheit(3);
+                Bedingungen.ErhoeheHunger(2);
+                Bedingungen.AktualisiereStatus();
+            }
+            else
+            {
+                Spielmechanik.ZentrierteAusgabe($"{tierName} hat nicht mehr genug Energie ({Energie})!");
+                Console.ReadKey();
+            }
         }
         public override void Spazieren()
         {
-            Spielmechanik.ZentrierteAusgabe($"Du gehst mit {tierName} eine Runde im Wald Spazieren");
-            Energie -= 20;
-            Hunger += 20;
-
-        }
-        public void Apportieren()
-        {
-            Spielmechanik.ZentrierteAusgabe($"{tierName} holt den geworfenen Ball");
-            Energie -= 15;
-            Zufriedenheit += 5;
-        }
-        public void Bellen()
-        {
-            Spielmechanik.ZentrierteAusgabe($"{tierName} bellt laut: Wuff! Wuff!");
-            Energie -= 5;
-        }
-        public override void Spielen()
-        {
-            Spielmechanik.ZentrierteAusgabe($"{tierName} spielt am Kratzbaum");
-            Energie -= 15;
-            Zufriedenheit += 5;
+            if (Bedingungen.HatGenugEnergie(15))
+            {
+                Spielmechanik.ZentrierteAusgabe($"{tierName} geht spazieren.");
+                Spielmechanik.Ladebalken(175, 175);
+                Bedingungen.VerbrauchEnergie(15);
+                Bedingungen.ErhoeheZufriedenheit(3);
+                Bedingungen.ErhoeheHunger(10);
+                Bedingungen.AktualisiereStatus();
+            }
+            else
+            {
+                Spielmechanik.ZentrierteAusgabe($"{tierName} hat nicht mehr genug Energie ({Energie})!");
+                Console.ReadKey();
+            }
         }
         public override void Streicheln()
         {
-            Spielmechanik.ZentrierteAusgabe($"{tierName} schnurrt zufrieden.");
-            Zufriedenheit += 5;
+            Spielmechanik.ZentrierteAusgabe($"{tierName} wird gestreichelt.");
+            Spielmechanik.Ladebalken(175, 175);
+            Bedingungen.ErhoeheZufriedenheit(5);
+            Bedingungen.ErhoeheEnergie(5);
+            Bedingungen.AktualisiereStatus();
         }
+
         public override void Trainieren()
         {
-            Spielmechanik.ZentrierteAusgabe($"{tierName} trainiert.");
-            Spielmechanik.Ladebalken(175, 175);
-            Energie -= 15;
-            Zufriedenheit += 10;
-            Hunger += 10;
+            if (Bedingungen.HatGenugEnergie(15))
+            {
+                Spielmechanik.ZentrierteAusgabe($"{tierName} trainiert.");
+                Spielmechanik.Ladebalken(175, 175);
+                Bedingungen.VerbrauchEnergie(15);
+                Bedingungen.ErhoeheZufriedenheit(2);
+                Bedingungen.ErhoeheHunger(10);
+                Bedingungen.AktualisiereStatus();
+            }
+            else
+            {
+                Spielmechanik.ZentrierteAusgabe($"{tierName} hat nicht mehr genug Energie ({Energie})!");
+                Console.ReadKey();
+            }
         }
 
         public override void Hygiene()
         {
             Spielmechanik.ZentrierteAusgabe($"{tierName} wird gepflegt.");
-
-            Gesundheit += 10;
-            Zufriedenheit += 5;
+            Bedingungen.ErhoeheZufriedenheit(5);
+            if (Gesundheit < Gesundheitmax && Gesundheit >= 75)
+            {
+                Bedingungen.ErhoeheGesundheit(10);
+            }
+            Bedingungen.AktualisiereStatus();
         }
 
         public override void Ruhen()
         {
             Spielmechanik.ZentrierteAusgabe($"{tierName} ruht sich aus.");
             Spielmechanik.Ladebalken(500, 1500);
-            Energie = Math.Min(120, Energie + 30);
-            Gesundheit += 5;
-            Zufriedenheit += 5;
+            Bedingungen.ErhoeheEnergie(30);
+            Bedingungen.ErhoeheHunger(20);
+            if (Gesundheit <= Energiemax)
+            {
+                Bedingungen.ErhoeheGesundheit(5);
+            }
+            Bedingungen.ErhoeheZufriedenheit(5);
+            Bedingungen.AktualisiereStatus();
         }
 
         public override void Futtern(int menge)
         {
             Spielmechanik.ZentrierteAusgabe($"{tierName} frisst.");
             Spielmechanik.Ladebalken(150, 100);
-
+            Bedingungen.VerringereHunger(menge);
+            Bedingungen.AktualisiereStatus();
         }
     }
 }

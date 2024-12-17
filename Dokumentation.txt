@@ -31,4 +31,6 @@ Probleme : Flüchtichkeitsfehler
 ------------------------------------------------------------------------------------------------
 Tag 5
 -Klasse Menüführung erstellt und Spielmachanik aufgeteilt -> Menüelemente in Menüführung (Anfängliche Schwierichkeiten da ErstelleHaustier nicht mit in MF > meinTier/tierAuswahl ist null)
--anfang Werte zuzuordnen und Maximal Werte festzulegen -> Levelsystem ?
+-Anfang Werte zuzuordnen und Maximal Werte festzulegen ->  + Levelsystem 
+-Klasse Bedinungen erstellt und Methoden erstellt um die Maximalwerte nicht zu überschreiten und nicht ins Minus zu gehen.
+-GrenzenMethode funktioniert nicht richtig änderungen von Werten ebenfalss als bedingungen gemacht und verschachtelt. 

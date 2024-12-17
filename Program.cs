@@ -9,6 +9,7 @@
             Haustier neuesTier = new Haustier("name");
             Hund neuerhund = new Hund("name");
             Menüführung menu = new Menüführung();
+            Bedingungen bedingungen = new Bedingungen();
 
             neuesSpiel.Begruessung();
             menu.ErstelleHaustier();
