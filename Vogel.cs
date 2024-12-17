@@ -12,7 +12,7 @@ namespace Haustier_Tamagotchi
     
             public override void sagHallo()
         {
-          Spielmechanik.ZentrierteAusgabe($"Allo ! Ich bin {tierName} dein Papagei");
+          Spielmechanik.ZentrierteAusgabe($"Allo ! Ich bin {tierName} dein Papagei .");
             Console.ReadKey();
         }
         public override string[] Aktivitaten()
@@ -111,6 +111,10 @@ namespace Haustier_Tamagotchi
             Spielmechanik.Ladebalken(150, 100);
             Bedingungen.VerringereHunger(menge);
             Bedingungen.AktualisiereStatus();
+        }
+        public override void ZeigeTier()
+        {
+            Spielmechanik.MyIMG("vogel2.png");
         }
     }
 }

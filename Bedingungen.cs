@@ -87,6 +87,7 @@ namespace Haustier_Tamagotchi
                 meinTier.Hungermax += 5;
                 meinTier.Energiemax += 10;
 
+                //Spielmechanik.ZentrierteAusgabe("        _                   _   _   _              \r\n__/\\__ | |    _____   _____| | | | | |_ __   __/\\__\r\n\\    / | |   / _ \\ \\ / / _ \\ | | | | | '_ \\  \\    /\r\n/_  _\\ | |__|  __/\\ V /  __/ | | |_| | |_) | /_  _\\\r\n  \\/   |_____\\___| \\_/ \\___|_|  \\___/| .__/    \\/  \r\n                                     |_|           ");
                 Spielmechanik.ZentrierteAusgabe($"Gratulation! {meinTier.tierName} ist aufgestiegen!");
                 Spielmechanik.ZentrierteAusgabe($"{meinTier.tierName} ist jetzt auf Level {meinTier.Level}.");
             }
@@ -95,9 +96,10 @@ namespace Haustier_Tamagotchi
         public static void Sterben()
         {
             GameOver = true;
+            //Spielmechanik.ZentrierteAusgabe("  ____                         ___                   _ \r\n / ___| __ _ _ __ ___   ___   / _ \\__   _____ _ __  | |\r\n| |  _ / _` | '_ ` _ \\ / _ \\ | | | \\ \\ / / _ \\ '__| | |\r\n| |_| | (_| | | | | | |  __/ | |_| |\\ V /  __/ |    |_|\r\n \\____|\\__,_|_| |_| |_|\\___|  \\___/  \\_/ \\___|_|    (_)");
             Spielmechanik.ZentrierteAusgabe($"{meinTier.tierName} ist verhungert und gestorben!");
             Thread.Sleep(3000);
-            Environment.Exit(0);
+            
         }
 
         public static void AktualisiereStatus()
@@ -110,13 +112,24 @@ namespace Haustier_Tamagotchi
 
         public static void PruefeHunger()
         {
-            if (meinTier.Hunger <= 0 || meinTier.Gesundheit == 0)
+            if (meinTier.Gesundheit == 0)
             {
                 Sterben();
             }
-            else if (meinTier.Hunger >= meinTier.Hungermax - 15)
+            else if (meinTier.Hunger >= meinTier.Hungermax - 25)
             {
-                 meinTier.Gesundheit -= 15;
+                 meinTier.Gesundheit -= 5;
+
+                if (meinTier.Hunger >= meinTier.Hungermax - 10)
+                {
+                    meinTier.Gesundheit -= 20;
+                    if (meinTier.Hunger == meinTier.Hungermax)
+                    {
+                        Spielmechanik.ZentrierteAusgabe($"{meinTier.tierName} ist ausgehungert !");
+                        Spielmechanik.ZentrierteAusgabe($"Gib {meinTier.tierName} etwas zu Essen bevor es Stierbt !");
+                        Console.ReadKey();
+                    }
+                }
             }
         }
 

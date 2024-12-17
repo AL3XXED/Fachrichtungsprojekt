@@ -1,4 +1,7 @@
-﻿namespace Haustier_Tamagotchi
+﻿using System.Drawing;
+using TrueColorConsole;
+
+namespace Haustier_Tamagotchi
 {
     internal class Program
     {
@@ -11,12 +14,16 @@
             Menüführung menu = new Menüführung();
             Bedingungen bedingungen = new Bedingungen();
 
+            
+
             neuesSpiel.Begruessung();
             menu.ErstelleHaustier();
             neuesTier.sagHallo();
             menu.Hauptmenu();
 
-            //MyIIMG("<Bildname.png>");
         }
+
+       
+        
     }
 }

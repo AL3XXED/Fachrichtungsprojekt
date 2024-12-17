@@ -30,7 +30,17 @@ Tag 4
 Probleme : Flüchtichkeitsfehler
 ------------------------------------------------------------------------------------------------
 Tag 5
--Klasse Menüführung erstellt und Spielmachanik aufgeteilt -> Menüelemente in Menüführung (Anfängliche Schwierichkeiten da ErstelleHaustier nicht mit in MF > meinTier/tierAuswahl ist null)
+-Klasse Menüführung erstellt und Spielmachanik aufgeteilt -> Menüelemente in Menüführung 
+(Anfängliche Schwierichkeiten da ErstelleHaustier nicht mit in MF > meinTier/tierAuswahl ist null)
 -Anfang Werte zuzuordnen und Maximal Werte festzulegen ->  + Levelsystem 
 -Klasse Bedinungen erstellt und Methoden erstellt um die Maximalwerte nicht zu überschreiten und nicht ins Minus zu gehen.
 -GrenzenMethode funktioniert nicht richtig änderungen von Werten ebenfalss als bedingungen gemacht und verschachtelt. 
+
+Probleme: Überblick und Fadenverloren beim erstellen der Methoden in Klasse Bedingungen, Unkonzentriert
+-----------------------------------------------------------------------------------------------
+Tag 6
+-Klasse Bedingungen und darin enthaltene Methoden vervollstädigt
+-Bildanzeige Methode implementiert und in andere Methoden verschachtelt
+-Bilder gesucht und angepasst
+
+Probleme: Passende Bilder finden, CorserPosotion setzetn so das dass Bild mittig ist

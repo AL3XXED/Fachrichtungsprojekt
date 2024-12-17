@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using TrueColorConsole;
 
 namespace Haustier_Tamagotchi
 {
     internal class Spielmechanik
     {
-        private Haustier meinTier;
+        public static Haustier meinTier;
         private string tierName;
         public static string text = " ";
         public static string uberschrift = (" \t\t  _______ _               _______                                _       _     _ \r\n\t\t |__   __(_)             |__   __|                              | |     | |   (_)\r\n\t\t    | |   _  ___ _ __ ______| | __ _ _ __ ___   __ _  __ _  ___ | |_ ___| |__  _ \r\n\t\t    | |  | |/ _ \\ '__|______| |/ _` | '_ ` _ \\ / _` |/ _` |/ _ \\| __/ __| '_ \\| |\r\n\t\t    | |  | |  __/ |         | | (_| | | | | | | (_| | (_| | (_) | || (__| | | | |\r\n\t\t    |_|  |_|\\___|_|         |_|\\__,_|_| |_| |_|\\__,_|\\__, |\\___/ \\__\\___|_| |_|_|\r\n                         \t\t                              __/ |                      \r\n                                  \t\t                     |___/                       \r\n========================================================================================================================");
@@ -66,6 +68,36 @@ namespace Haustier_Tamagotchi
             startpunkt = Math.Min(startpunkt, fensterbreite - text.Length);  // Stellt sicher, dass der Startpunkt innerhalb der Fensterbreite liegt
             Console.SetCursorPosition(startpunkt, Console.CursorTop);
             Console.WriteLine(text);
+        }
+        internal static void MyIMG(string img_name) //hier wird der Name ünergeben zb. Bild.png
+        {
+            string gdir = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
+            gdir += @"\ressource\" + img_name;
+            int res_x = 36;
+            int res_y = 36;
+
+
+            Bitmap image = new Bitmap(new Bitmap(gdir), new Size(res_x, res_y));
+            //Für res_x habe ich ein Feld mit int 240 und bei res_y ein int mit 100. Für die Bilder sollten ebenfalls die DIMENSIONEN 240px x 100px haben
+
+            VTConsole.Enable();
+            int Y = 1;
+            Console.SetCursorPosition(45, Y);
+            for (int y = 0; y <= res_y - 1; y = y + 2)
+            {
+                Y++;
+                for (int x = 0; x <= res_x - 1; x++)
+                {
+                    Color color = image.GetPixel(x, y);
+
+                    VTConsole.Write(((char)'\u2588').ToString(), Color.FromArgb(color.R, color.G, color.B));
+                    //Achtung hier wird die Nuget Bibliothek True Color Console verwendet
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                Console.WriteLine();
+                Console.SetCursorPosition(45, Y);
+                VTConsole.Disable();
+            }
         }
     }
 }

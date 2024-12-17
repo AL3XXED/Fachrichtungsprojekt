@@ -12,7 +12,7 @@ namespace Haustier_Tamagotchi
 
         public override void sagHallo()
         {
-            Spielmechanik.ZentrierteAusgabe($"Wuff! Ich bin {tierName} dein neuer Freund");
+            Spielmechanik.ZentrierteAusgabe($"Wuff! Ich bin {tierName} dein neuer Freund .");
         }
         public override string[] Aktivitaten()
         {
@@ -23,6 +23,8 @@ namespace Haustier_Tamagotchi
         {
             if (Bedingungen.HatGenugEnergie(5))
             {
+                Console.Clear();
+                ZeigeTier();
                 Spielmechanik.ZentrierteAusgabe($"{tierName} spielt.");
                 Spielmechanik.Ladebalken(100, 100);
                 Bedingungen.VerbrauchEnergie(5);
@@ -94,7 +96,7 @@ namespace Haustier_Tamagotchi
         public override void Ruhen()
         {
             Spielmechanik.ZentrierteAusgabe($"{tierName} ruht sich aus.");
-            Spielmechanik.Ladebalken(500, 1500);
+            //Spielmechanik.Ladebalken(500, 1500);
             Bedingungen.ErhoeheEnergie(30);
             Bedingungen.ErhoeheHunger(20);
             if (Gesundheit <= Energiemax)
@@ -108,9 +110,13 @@ namespace Haustier_Tamagotchi
         public override void Futtern(int menge)
         {
             Spielmechanik.ZentrierteAusgabe($"{tierName} frisst.");
-            Spielmechanik.Ladebalken(150, 100);
+            //Spielmechanik.Ladebalken(150, 100);
             Bedingungen.VerringereHunger(menge);
             Bedingungen.AktualisiereStatus();
+        }
+        public override void ZeigeTier()
+        {
+            Spielmechanik.MyIMG("hund2.png");
         }
     }
 }

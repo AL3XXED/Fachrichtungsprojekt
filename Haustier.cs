@@ -145,5 +145,11 @@ namespace Haustier_Tamagotchi
         {
             return !Bedingungen.GameOver;
         }
+
+        public virtual void ZeigeTier()
+        {
+            
+            Spielmechanik.MyIMG("bild");
+        }
     }
 }

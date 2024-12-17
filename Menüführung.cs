@@ -57,6 +57,8 @@ namespace Haustier_Tamagotchi
                     break;
             }
             Console.Clear();
+            meinTier.ZeigeTier();
+            Console.WriteLine();
             Spielmechanik.ZentrierteAusgabe($"Großartig! Dein neues Haustier ist ein(e) {haustiertypAuswahl[haustierTyp]} namens {tierName}.\n\n\n");
             meinTier.sagHallo();
             Console.SetCursorPosition(57, 25);

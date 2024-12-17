@@ -12,7 +12,7 @@ namespace Haustier_Tamagotchi
     
             public override void sagHallo()
         {
-            Spielmechanik.ZentrierteAusgabe($"Pipps! Ich bin {tierName} deine kleine Süße Maus");
+            Spielmechanik.ZentrierteAusgabe($"Pipps! Ich bin {tierName} deine kleine Süße Maus .");
         }
         public override void Spielen()
         {
@@ -105,6 +105,10 @@ namespace Haustier_Tamagotchi
             Spielmechanik.Ladebalken(150, 100);
             Bedingungen.VerringereHunger(menge);
             Bedingungen.AktualisiereStatus();
+        }
+        public override void ZeigeTier()
+        {
+            Spielmechanik.MyIMG("maus2.png");
         }
     }
 }

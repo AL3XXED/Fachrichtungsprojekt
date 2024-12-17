@@ -12,7 +12,7 @@ namespace Haustier_Tamagotchi
 
         public override void sagHallo()
         {
-            Spielmechanik.ZentrierteAusgabe($"Miauu! Ich bin {tierName} die Katze");
+            Spielmechanik.ZentrierteAusgabe($"Miauu! Ich bin {tierName} die Katze .");
         }
         public override void Spielen()
         {
@@ -34,6 +34,7 @@ namespace Haustier_Tamagotchi
         {
             if (Bedingungen.HatGenugEnergie(15))
             {
+                Console.Clear();
                 Spielmechanik.ZentrierteAusgabe($"{tierName} folgt dir beim spazieren.");
                 Spielmechanik.Ladebalken(175, 175);
                 Bedingungen.VerbrauchEnergie(15);
@@ -105,6 +106,10 @@ namespace Haustier_Tamagotchi
             Spielmechanik.Ladebalken(150, 100);
             Bedingungen.VerringereHunger(menge);
             Bedingungen.AktualisiereStatus();
+        }
+        public override void ZeigeTier()
+        {
+            Spielmechanik.MyIMG("katze2.png");
         }
     }
 }
