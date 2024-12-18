@@ -10,15 +10,22 @@ namespace Haustier_Tamagotchi
     {
         public Katze(string tierName) : base(tierName) { }
 
+        public override string[] Aktivitaten()
+        {
+            return ["  Erkundungstour  ", "  Streicheln ", "   Laserpointer   ", "  Kratzbaum ", "   Hygiene   ", "zurück"];
+        }
         public override void sagHallo()
         {
-            Spielmechanik.ZentrierteAusgabe($"Miauu! Ich bin {tierName} die Katze .");
+            Spielmechanik.ZentrierteAusgabe($"Miauu! Ich bin {tierName} die Katze.");
         }
         public override void Spielen()
         {
             if (Bedingungen.HatGenugEnergie(5))
             {
-                Spielmechanik.ZentrierteAusgabe($"{tierName} spielt.");
+                Console.Clear();
+                ZeigeTier();
+                Console.WriteLine();
+                Spielmechanik.ZentrierteAusgabe($"{spielerName} benutzt ein Laserpointer und spielt mit {tierName}.");
                 Spielmechanik.Ladebalken(100, 100);
                 Bedingungen.VerbrauchEnergie(5);
                 Bedingungen.ErhoeheZufriedenheit(3);
@@ -27,6 +34,9 @@ namespace Haustier_Tamagotchi
             }
             else
             {
+                Console.Clear();
+                ZeigeTier();
+                Console.WriteLine();
                 Spielmechanik.ZentrierteAusgabe($"{tierName} hat nicht mehr genug Energie ({Energie})!");
             }
         }
@@ -35,7 +45,9 @@ namespace Haustier_Tamagotchi
             if (Bedingungen.HatGenugEnergie(15))
             {
                 Console.Clear();
-                Spielmechanik.ZentrierteAusgabe($"{tierName} folgt dir beim spazieren.");
+                ZeigeTier();
+                Console.WriteLine();
+                Spielmechanik.ZentrierteAusgabe($"{spielerName} geht raus in den Garten und {tierName} kommt mit auf Erkundungstour.");
                 Spielmechanik.Ladebalken(175, 175);
                 Bedingungen.VerbrauchEnergie(15);
                 Bedingungen.ErhoeheZufriedenheit(3);
@@ -44,13 +56,21 @@ namespace Haustier_Tamagotchi
             }
             else
             {
+                Console.Clear();
+                ZeigeTier();
+                Console.WriteLine();
                 Spielmechanik.ZentrierteAusgabe($"{tierName} hat nicht mehr genug Energie ({Energie})!");
                 Console.ReadKey();
             }
         }
         public override void Streicheln()
         {
-            Spielmechanik.ZentrierteAusgabe($"{tierName} wird gestreichelt.");
+            Console.Clear();
+            ZeigeTier();
+            Console.WriteLine();
+            Spielmechanik.ZentrierteAusgabe($"{tierName} lässt sich von {spielerName} streicheln und verwöhnen.");
+            Console.WriteLine();
+            Spielmechanik.ZentrierteAusgabe($"{tierName} schnurrt dabei.");
             Spielmechanik.Ladebalken(175, 175);
             Bedingungen.ErhoeheZufriedenheit(5);
             Bedingungen.ErhoeheEnergie(5);
@@ -61,7 +81,12 @@ namespace Haustier_Tamagotchi
         {
             if (Bedingungen.HatGenugEnergie(15))
             {
-                Spielmechanik.ZentrierteAusgabe($"{tierName} trainiert.");
+                Console.Clear();
+                ZeigeTier();
+                Console.WriteLine();
+                Spielmechanik.ZentrierteAusgabe($"{tierName} rennt den Kratzbaum Hoch und Runter.");
+                Console.WriteLine();
+                Spielmechanik.ZentrierteAusgabe($"{tierName} hat seine 5 Minuten.");
                 Spielmechanik.Ladebalken(175, 175);
                 Bedingungen.VerbrauchEnergie(15);
                 Bedingungen.ErhoeheZufriedenheit(2);
@@ -70,6 +95,9 @@ namespace Haustier_Tamagotchi
             }
             else
             {
+                Console.Clear();
+                ZeigeTier();
+                Console.WriteLine();
                 Spielmechanik.ZentrierteAusgabe($"{tierName} hat nicht mehr genug Energie ({Energie})!");
                 Console.ReadKey();
             }
@@ -77,32 +105,35 @@ namespace Haustier_Tamagotchi
 
         public override void Hygiene()
         {
-            Spielmechanik.ZentrierteAusgabe($"{tierName} wird gepflegt.");
+            Console.Clear();
+            ZeigeTier();
+            Console.WriteLine();
+            Spielmechanik.ZentrierteAusgabe($"{spielerName} kämmt {tierName} das Fell.");
             Bedingungen.ErhoeheZufriedenheit(5);
-            if (Gesundheit < Gesundheitmax && Gesundheit >= 75)
-            {
-                Bedingungen.ErhoeheGesundheit(10);
-            }
+            Bedingungen.ErhoeheGesundheit(10);
             Bedingungen.AktualisiereStatus();
         }
 
         public override void Ruhen()
         {
-            Spielmechanik.ZentrierteAusgabe($"{tierName} ruht sich aus.");
+            Console.Clear();
+            ZeigeTier();
+            Console.WriteLine();
+            Spielmechanik.ZentrierteAusgabe($"{tierName} schläft auf {spielerName}`s Schoß ein.");
             Spielmechanik.Ladebalken(500, 1500);
             Bedingungen.ErhoeheEnergie(30);
             Bedingungen.ErhoeheHunger(20);
-            if (Gesundheit <= Energiemax)
-            {
-                Bedingungen.ErhoeheGesundheit(5);
-            }
+            Bedingungen.ErhoeheGesundheit(5);
             Bedingungen.ErhoeheZufriedenheit(5);
             Bedingungen.AktualisiereStatus();
         }
 
         public override void Futtern(int menge)
         {
-            Spielmechanik.ZentrierteAusgabe($"{tierName} frisst.");
+            Console.Clear();
+            ZeigeTier();
+            Console.WriteLine();
+            Spielmechanik.ZentrierteAusgabe($"{tierName} frisst in Ruhe was ihm {spielerName} gegeben hat und Freut sich.");
             Spielmechanik.Ladebalken(150, 100);
             Bedingungen.VerringereHunger(menge);
             Bedingungen.AktualisiereStatus();

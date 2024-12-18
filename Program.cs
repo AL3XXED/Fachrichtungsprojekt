@@ -5,7 +5,7 @@ namespace Haustier_Tamagotchi
 {
     internal class Program
     {
-    
+
         static void Main(string[] args)
         {
             Spielmechanik neuesSpiel = new Spielmechanik();
@@ -14,7 +14,7 @@ namespace Haustier_Tamagotchi
             Menüführung menu = new Menüführung();
             Bedingungen bedingungen = new Bedingungen();
 
-            
+
 
             neuesSpiel.Begruessung();
             menu.ErstelleHaustier();
@@ -22,8 +22,5 @@ namespace Haustier_Tamagotchi
             menu.Hauptmenu();
 
         }
-
-       
-        
     }
 }

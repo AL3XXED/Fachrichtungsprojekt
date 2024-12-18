@@ -11,7 +11,7 @@ namespace Haustier_Tamagotchi
         public static Haustier meinTier;
         private string[] haustiertypAuswahl = { "Hund", "Katze", "Maus", "Vogel" };
         private int auswahlIndex = 0;
-        private string tierName;
+        public static string tierName;
 
         public void ErstelleHaustier()
         {
@@ -21,15 +21,21 @@ namespace Haustier_Tamagotchi
 
             do
             {
-                Spielmechanik.text = ("Wähle dein Haustier aus:\n");
-                haustierTyp = NavigationsMenu(haustiertypAuswahl);
+                Spielmechanik.text = ("Wähle dein Haustier aus:\n");        //Auswahl des Haustiers durch die Navigationsmethode welche die Pfeiltasten
+                haustierTyp = NavigationsMenu(haustiertypAuswahl);          //und Enter als Eingabe nutzt
                 Console.Clear();
+                Console.SetCursorPosition(0, 5);
                 Spielmechanik.ZentrierteAusgabe($"Du hast {haustiertypAuswahl[haustierTyp]} gewählt.");
+                Console.SetCursorPosition(0, 7);
                 Spielmechanik.ZentrierteAusgabe("Wie soll dein Haustier heißen?:");
-                Console.SetCursorPosition(57, 4);
-                Console.CursorVisible = true;
+                Console.SetCursorPosition(57, 13);
+                Spielmechanik.ZentrierteAusgabe("---------------");
+                Console.SetCursorPosition(57, 12);                           //Cursor-position wird auf die mitte der Konsole gesetzt 
+                Console.CursorVisible = true;                               //für die Eingabe Tiername
                 tierName = Console.ReadLine().Trim();
-                Console.CursorVisible = false;
+                Console.CursorVisible = false;                              //Corsor wird unsichtbar gemacht
+
+                //Abfrage ob Haustier und Namens wahl richtig sind, falls Nein kann man es nochmal versuchen
                 Spielmechanik.ZentrierteAusgabe($"Du möchtest also ein(e/en) {haustiertypAuswahl[haustierTyp]} namens {tierName}. Ist das korrekt? ");
                 string[] bestatigungmenuAuswahl = { "             Ja              ", "Nein, ich möchte etwas ändern" };
                 Spielmechanik.text = ("Bestätige deine Auswahl:\n");
@@ -38,8 +44,8 @@ namespace Haustier_Tamagotchi
                 weiter = (bestatigungsAuswahl == 0);
             } while (!weiter);
 
-            switch (haustierTyp)
-            {
+            switch (haustierTyp)            //Hier wird das gewählte Tier erstellt, welches sich auf die Kindklassen von Haustier bezieht
+            {                               //um anschließend die passenden Auswahl & Ausgabe texte anzeigt
                 case 0:
                     meinTier = new Hund(tierName);
                     break;
@@ -57,35 +63,35 @@ namespace Haustier_Tamagotchi
                     break;
             }
             Console.Clear();
-            meinTier.ZeigeTier();
+            meinTier.ZeigeTier();                       //Zeigt ein Pixelbild vom gewählten Haustier => Hund, Katze, Maus oder Vogel
             Console.WriteLine();
             Spielmechanik.ZentrierteAusgabe($"Großartig! Dein neues Haustier ist ein(e) {haustiertypAuswahl[haustierTyp]} namens {tierName}.\n\n\n");
-            meinTier.sagHallo();
-            Console.SetCursorPosition(57, 25);
+            meinTier.sagHallo();                        //Methodenaufruf der mit Override in Kindklasse passend zum Tier ausgegeben wird
+            Console.SetCursorPosition(57, 27);
             Spielmechanik.ZentrierteAusgabe("Drücke eine beliebige Taste um fortzufahren ...");
             Console.ReadKey();
         }
         private int NavigationsMenu(string[] menuItems)         //Fügt die benutzung der Pfeiltasten in der Menüausgabe ein
         {
-            auswahlIndex = 0;
+            auswahlIndex = 0;                                   //Diese Methode wird ein allen Menüs benutzt und ist Grundlegend für das Spiel
             while (true)
             {
-                DisplayMenu(menuItems);
+                DisplayMenu(menuItems);                         //Zeigt die Menü-Auswahl an,durch die Displaymenu-Methode
                 switch (Console.ReadKey(true).Key)
                 {
-                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.UpArrow:                    //Bewegt die Auswahl nach oben,wenn es Anfang ist springt es auf das unterste
                         auswahlIndex = (auswahlIndex - 1 + menuItems.Length) % menuItems.Length;
                         break;
-                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.DownArrow:                  //Bewegt die Auswahl nach unten, wenn es das unterste ist springt es nach oben
                         auswahlIndex = (auswahlIndex + 1) % menuItems.Length;
                         break;
-                    case ConsoleKey.Enter:
+                    case ConsoleKey.Enter:                      //Eingabe mit Enter und gibt den Auswahlindex zurück
                         return auswahlIndex;
                 }
             }
         }
 
-        private void DisplayMenu(string[] menuItems)   //Setzt das aktuell gewälte in > < zur optischen Übersicht
+        private void DisplayMenu(string[] menuItems)   //Setzt die aktuell Auswahl in > < zur optischen Übersicht
         {
             Console.CursorVisible = false;
             Console.Clear();
@@ -99,12 +105,12 @@ namespace Haustier_Tamagotchi
                 }
                 else
                 {
-                    Spielmechanik.ZentrierteAusgabe($" {menuItems[i]} ");
+                    Spielmechanik.ZentrierteAusgabe($" {menuItems[i]} "); //Zeigt die Auswahloptionen an
                 }
 
             }
         }
-        public void Hauptmenu()
+        public void Hauptmenu()                         //Hauptmenü von dem man in die unterschiedlichen Menü-Methoden kommt
         {
             Spielmechanik.ZentrierteAusgabe("~ Hauptmenü ~\n");
             string[] hauptmenuAnzeige = { "Aktivitäten", "   Essen   ", "    Ruhe   ", "   Status  ", "  Beenden  " };
@@ -113,17 +119,17 @@ namespace Haustier_Tamagotchi
                 int auswahl = NavigationsMenu(hauptmenuAnzeige);
                 switch (auswahl)
                 {
-                    case 0:                             // Aktivitäten
+                    case 0:                             // Aktivitäten Menü
                         AktivitatenMenu();
                         break;
-                    case 1:                             // Essen
+                    case 1:                             // Essens Menü
                         EssenMenu();
                         break;
-                    case 2:                             // Ruhe
+                    case 2:                             // Ruhe Methode
                         meinTier.Ruhen();
                         break;
-                    case 3:                            // Status
-                        Statusmenu();
+                    case 3:                            // Status Methode
+                        Statusanzeige();
                         break;
                     case 4:                            // Beenden
                         return;
@@ -131,7 +137,7 @@ namespace Haustier_Tamagotchi
             }
         }
 
-        private void AktivitatenMenu()
+        private void AktivitatenMenu()              //Aktivitäten Anzeige wird in Kindklassen überschrieben je nach gewähltem Tier
         {
             string[] aktivitatsmenuAnzeige = meinTier.Aktivitaten();
             Spielmechanik.ZentrierteAusgabe("~ Aktivitätsmenü ~");
@@ -158,7 +164,7 @@ namespace Haustier_Tamagotchi
             }
 
         }
-        private void EssenMenu()
+        private void EssenMenu()                    //Essenmenü um je nach Wahl den Wert Hunger wieder zu verringern & Zufriedenheit erhöht
         {
             string[] essenmenuAnzeige = { " Leckerli ", "  Snack   ", " Mahlzeit ", "zurück" };
             Spielmechanik.ZentrierteAusgabe("~ Essensmenü ~");
@@ -167,7 +173,7 @@ namespace Haustier_Tamagotchi
             {
                 case 0:                     //Leckerli
                     if (meinTier.Hunger < meinTier.Hungermax)
-                    { meinTier.Futtern(5);meinTier.Zufriedenheit++; }
+                    { meinTier.Futtern(5); meinTier.Zufriedenheit++; }
                     else
                     { Spielmechanik.ZentrierteAusgabe($"{meinTier.tierName} hat kein Hunger."); }
                     break;
@@ -187,33 +193,86 @@ namespace Haustier_Tamagotchi
                     return;
             }
         }
-        private void Statusmenu()
+        private void Statusanzeige()
         {
-            string[] statusmenuAnzeige = { "Status", "Tipps", "zurück" };
-            Spielmechanik.ZentrierteAusgabe(" ~Statusmenü ~");
-            int auswahl = NavigationsMenu(statusmenuAnzeige);
-            switch (auswahl)
+
+            Console.Clear();
+            meinTier.ZeigeTier();
+            Spielmechanik.ZentrierteAusgabe($"{meinTier.tierName}'s Status:\n");
+            Spielmechanik.ZentrierteAusgabe($"Level: {meinTier.Level}");
+
+            if(meinTier.Gesundheit > meinTier.Gesundheitmax - 25)               //Bedingungen eingefügt um Anzeige der Statuswerte einzufärben
             {
-                case 0:
-                    Console.Clear();
-                    Spielmechanik.ZentrierteAusgabe($"{meinTier.tierName}'s Status:\n");
-                    Spielmechanik.ZentrierteAusgabe($"Level: {meinTier.Level}");
-                    Spielmechanik.ZentrierteAusgabe($"Gesundheit: {meinTier.Gesundheit} / {meinTier.Gesundheitmax}");
-                    Spielmechanik.ZentrierteAusgabe($"Hunger: {meinTier.Hunger} / {meinTier.Hungermax}");
-                    Spielmechanik.ZentrierteAusgabe($"Energie: {meinTier.Energie} / {meinTier.Energiemax}");
-                    Spielmechanik.ZentrierteAusgabe($"Zufriedenheit: {meinTier.Zufriedenheit} / {meinTier.Zufriedenheitmax}");
-                    Console.ReadKey();
-                    return;
-
-                case 1:
-                    Console.Clear();
-                    Spielmechanik.ZentrierteAusgabe("<Tipps einfügen>");                      //String-Array mit Tipps erstellen!
-                    Console.ReadKey();
-                    return;
-                case 2:
-                    return;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Spielmechanik.ZentrierteAusgabe($"Gesundheit: {meinTier.Gesundheit} / {meinTier.Gesundheitmax}");
+                Console.ResetColor();
             }
+            else if(meinTier.Gesundheit < meinTier.Gesundheitmax - 25 && meinTier.Gesundheit > meinTier.Gesundheitmax - 75)
+            { 
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Spielmechanik.ZentrierteAusgabe($"Gesundheit: {meinTier.Gesundheit} / {meinTier.Gesundheitmax}");
+                Console.ResetColor();
+            }
+            else if (meinTier.Gesundheit < meinTier.Gesundheitmax - 75)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Spielmechanik.ZentrierteAusgabe($"Gesundheit: {meinTier.Gesundheit} / {meinTier.Gesundheitmax}");
+                Console.ResetColor();
+            }
+            //----------------------------------------------------------------------------------------------------
 
+            if (meinTier.Hunger < meinTier.Hungermax - 60)                   //Bedingungen eingefügt um Anzeige der Statuswerte einzufärben
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Spielmechanik.ZentrierteAusgabe($"Hunger: {meinTier.Hunger} / {meinTier.Hungermax}");
+                Console.ResetColor();
+            }
+            else if (meinTier.Hunger > meinTier.Hungermax - 60 && meinTier.Hunger < meinTier.Hungermax - 20)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Spielmechanik.ZentrierteAusgabe($"Hunger: {meinTier.Hunger} / {meinTier.Hungermax}");
+                Console.ResetColor();
+            }
+            else if (meinTier.Hunger > meinTier.Hungermax - 20)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Spielmechanik.ZentrierteAusgabe($"Hunger: {meinTier.Hunger} / {meinTier.Hungermax}"); 
+                Console.ResetColor();
+            }
+            //----------------------------------------------------------------------------------------------------
+
+            if (meinTier.Energie > meinTier.Energiemax - 20)                //Bedingungen eingefügt um Anzeige der Statuswerte einzufärben
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Spielmechanik.ZentrierteAusgabe($"Energie: {meinTier.Energie} / {meinTier.Energiemax}");
+                Console.ResetColor();
+            }
+            else if (meinTier.Energie < meinTier.Energiemax - 20  && meinTier.Energie > meinTier.Energiemax - 60)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Spielmechanik.ZentrierteAusgabe($"Energie: {meinTier.Energie} / {meinTier.Energiemax}");
+                Console.ResetColor();
+            }
+            else if (meinTier.Energie < meinTier.Energiemax - 60)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Spielmechanik.ZentrierteAusgabe($"Energie: {meinTier.Energie} / {meinTier.Energiemax}");
+                Console.ResetColor();
+            }
+            //---------------------------------------------------------------------------------------------------
+
+            if (meinTier.Zufriedenheit > meinTier.Zufriedenheitmax - 25)            //Bedingungen eingefügt um Anzeige der Statuswerte einzufärben
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Spielmechanik.ZentrierteAusgabe($"Zufriedenheit: {meinTier.Zufriedenheit} / {meinTier.Zufriedenheitmax}");
+                Console.ResetColor();
+            }
+            else 
+            { 
+                Spielmechanik.ZentrierteAusgabe($"Zufriedenheit: {meinTier.Zufriedenheit} / {meinTier.Zufriedenheitmax}"); 
+            }
+            Console.ReadKey();
+            return;
         }
     }
 }

@@ -14,7 +14,8 @@ namespace Haustier_Tamagotchi
     internal class Spielmechanik
     {
         public static Haustier meinTier;
-        private string tierName;
+        public static string tierName;
+        public static string spielerName;
         public static string text = " ";
         public static string uberschrift = (" \t\t  _______ _               _______                                _       _     _ \r\n\t\t |__   __(_)             |__   __|                              | |     | |   (_)\r\n\t\t    | |   _  ___ _ __ ______| | __ _ _ __ ___   __ _  __ _  ___ | |_ ___| |__  _ \r\n\t\t    | |  | |/ _ \\ '__|______| |/ _` | '_ ` _ \\ / _` |/ _` |/ _ \\| __/ __| '_ \\| |\r\n\t\t    | |  | |  __/ |         | | (_| | | | | | | (_| | (_| | (_) | || (__| | | | |\r\n\t\t    |_|  |_|\\___|_|         |_|\\__,_|_| |_| |_|\\__,_|\\__, |\\___/ \\__\\___|_| |_|_|\r\n                         \t\t                              __/ |                      \r\n                                  \t\t                     |___/                       \r\n========================================================================================================================");
 
@@ -25,6 +26,8 @@ namespace Haustier_Tamagotchi
         {
             Console.WriteLine(Spielmechanik.uberschrift);
             ZentrierteAusgabe("Bitte gib dein Namen ein:");
+            Console.SetCursorPosition(58, 12);
+            Spielmechanik.ZentrierteAusgabe("---------------");
             Console.SetCursorPosition(58, 11);
             string spielerName = Console.ReadLine().ToUpper();
             ZentrierteAusgabe($"Hallo {spielerName}! Lass uns dein virtuelles Haustier erstellen.");

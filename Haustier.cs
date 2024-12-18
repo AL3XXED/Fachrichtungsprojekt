@@ -9,6 +9,7 @@ namespace Haustier_Tamagotchi
     public class Haustier
     {
         public string tierName { get; set; }
+        public static string spielerName { get; set; }
         public int Level { get; set; }
         public int Gesundheit { get; set; }
         public int Hunger { get; set; }
@@ -50,10 +51,13 @@ namespace Haustier_Tamagotchi
         {
             Spielmechanik.ZentrierteAusgabe($"Hallo, ich bin {tierName}!\nDein neuer Besterfreund <3");
         }
-        public virtual void Spielen()
+        public virtual void Spielen()                       //Virual-Methode spielen welche in Kindklassen individuel überschrieben wird
         {
             if (Bedingungen.HatGenugEnergie(5))
             {
+                Console.Clear();
+                ZeigeTier();
+                Console.WriteLine();
                 Spielmechanik.ZentrierteAusgabe($"{tierName} spielt.");
                 Spielmechanik.Ladebalken(100, 100);
                 Bedingungen.VerbrauchEnergie(5);
@@ -63,13 +67,19 @@ namespace Haustier_Tamagotchi
             }
             else
             {
+                Console.Clear();
+                ZeigeTier();
+                Console.WriteLine();
                 Spielmechanik.ZentrierteAusgabe($"{tierName} hat nicht mehr genug Energie ({Energie})!");
             }
         }
-        public virtual void Spazieren()
+        public virtual void Spazieren()                         //Virual-Methode Spazieren welche ebenfalls individuel in Kindklassen überschrieben wird
         {
-            if (Bedingungen.HatGenugEnergie(15))
+            if (Bedingungen.HatGenugEnergie(15))                //Abfrage durch Methode aus Klasse Bedingungen
             {
+                Console.Clear();
+                ZeigeTier();
+                Console.WriteLine();
                 Spielmechanik.ZentrierteAusgabe($"{tierName} geht spazieren.");
                 Spielmechanik.Ladebalken(175, 175);
                 Bedingungen.VerbrauchEnergie(15);
@@ -79,11 +89,17 @@ namespace Haustier_Tamagotchi
             }
             else
             {
+                Console.Clear();
+                ZeigeTier();
+                Console.WriteLine();
                 Spielmechanik.ZentrierteAusgabe($"{tierName} hat nicht mehr genug Energie ({Energie})!");
             }
         }
         public virtual void Streicheln()
         {
+            Console.Clear();
+            ZeigeTier();
+            Console.WriteLine();
             Spielmechanik.ZentrierteAusgabe($"{tierName} wird gestreichelt.");
             Spielmechanik.Ladebalken(175, 175);
             Bedingungen.ErhoeheZufriedenheit(5);
@@ -95,6 +111,9 @@ namespace Haustier_Tamagotchi
         {
             if (Bedingungen.HatGenugEnergie(15))
             {
+                Console.Clear();
+                ZeigeTier();
+                Console.WriteLine();
                 Spielmechanik.ZentrierteAusgabe($"{tierName} trainiert.");
                 Spielmechanik.Ladebalken(175, 175);
                 Bedingungen.VerbrauchEnergie(15);
@@ -104,51 +123,51 @@ namespace Haustier_Tamagotchi
             }
             else
             {
+                Console.Clear();
+                ZeigeTier();
+                Console.WriteLine(); ;
                 Spielmechanik.ZentrierteAusgabe($"{tierName} hat nicht mehr genug Energie ({Energie})!");
             }
         }
 
         public virtual void Hygiene()
         {
+            Console.Clear();
+            ZeigeTier();
+            Console.WriteLine();
             Spielmechanik.ZentrierteAusgabe($"{tierName} wird gepflegt.");
             Bedingungen.ErhoeheZufriedenheit(5);
-            if (Gesundheit < Gesundheitmax && Gesundheit >= 75)
-            {
-                Bedingungen.ErhoeheGesundheit(10);
-            }
+            Bedingungen.ErhoeheGesundheit(10);
             Bedingungen.AktualisiereStatus();
         }
 
         public virtual void Ruhen()
         {
+            Console.Clear();
+            ZeigeTier();
+            Console.WriteLine();
             Spielmechanik.ZentrierteAusgabe($"{tierName} ruht sich aus.");
             Spielmechanik.Ladebalken(500, 1500);
             Bedingungen.ErhoeheEnergie(30);
             Bedingungen.ErhoeheHunger(20);
-            if (Gesundheit <= Energiemax)
-            {
-                Bedingungen.ErhoeheGesundheit(5);
-            }
+            Bedingungen.ErhoeheGesundheit(5);
             Bedingungen.ErhoeheZufriedenheit(5);
             Bedingungen.AktualisiereStatus();
         }
 
-        public virtual void Futtern(int menge)
+        public virtual void Futtern(int menge)                  //int menge in Menüführung.Essenmenu deklariert
         {
-            Spielmechanik.ZentrierteAusgabe($"{tierName} frisst.");
+            Console.Clear();
+            ZeigeTier();
+            Console.WriteLine();
+            Spielmechanik.ZentrierteAusgabe($"{tierName} frisst in Ruhe und Freut sich.");
             Spielmechanik.Ladebalken(150, 100);
             Bedingungen.VerringereHunger(menge);
             Bedingungen.AktualisiereStatus();
         }
 
-        public bool IstAmLeben()
-        {
-            return !Bedingungen.GameOver;
-        }
-
         public virtual void ZeigeTier()
         {
-            
             Spielmechanik.MyIMG("bild");
         }
     }

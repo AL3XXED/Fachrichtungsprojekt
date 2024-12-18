@@ -44,3 +44,7 @@ Tag 6
 -Bilder gesucht und angepasst
 
 Probleme: Passende Bilder finden, CorserPosotion setzetn so das dass Bild mittig ist
+-----------------------------------------------------------------------------------------------
+Tag 7
+-Programm auskommentieren und Verbesserungen einfügen => Ausgabe in der Console optiemieren
+-Kindklassen fertig gestellt
