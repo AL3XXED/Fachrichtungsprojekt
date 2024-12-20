@@ -64,8 +64,7 @@ namespace Haustier_Tamagotchi
             }
             Console.Clear();
             meinTier.ZeigeTier();                       //Zeigt ein Pixelbild vom gewählten Haustier => Hund, Katze, Maus oder Vogel
-            Console.WriteLine();
-            Spielmechanik.ZentrierteAusgabe($"Großartig! Dein neues Haustier ist ein(e) {haustiertypAuswahl[haustierTyp]} namens {tierName}.\n\n\n");
+            Console.SetCursorPosition(0, 24);
             meinTier.sagHallo();                        //Methodenaufruf der mit Override in Kindklasse passend zum Tier ausgegeben wird
             Console.SetCursorPosition(57, 27);
             Spielmechanik.ZentrierteAusgabe("Drücke eine beliebige Taste um fortzufahren ...");

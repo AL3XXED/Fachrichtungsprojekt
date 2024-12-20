@@ -16,7 +16,7 @@ namespace Haustier_Tamagotchi
         }
         public override void sagHallo()
         {
-            Spielmechanik.ZentrierteAusgabe($"Pipps! Ich bin {tierName} deine kleine Süße Maus .");
+            Spielmechanik.ZentrierteAusgabe($"Pipps! Ich bin {tierName} deine kleine Süße Maus.");
         }
         public override void Spielen()
         {
@@ -28,6 +28,10 @@ namespace Haustier_Tamagotchi
                 Spielmechanik.ZentrierteAusgabe($"{spielerName} hat ein Hindernisparcour für {tierName} gebaut.");
                 Console.WriteLine();
                 Spielmechanik.ZentrierteAusgabe($"{tierName} freut sich und rennt durch den Parkour <3"); ;
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Spielmechanik.ZentrierteAusgabe(" Energie -5   ~   Hunger +2   ~   Zufriedenheit +3");
+                Console.ResetColor();
                 Spielmechanik.Ladebalken(100, 100);
                 Bedingungen.VerbrauchEnergie(5);
                 Bedingungen.ErhoeheZufriedenheit(3);
@@ -50,6 +54,10 @@ namespace Haustier_Tamagotchi
                 ZeigeTier();
                 Console.WriteLine();
                 Spielmechanik.ZentrierteAusgabe($"{tierName} sitzt auf deiner Schulter wärend du spazieren gehst.");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Spielmechanik.ZentrierteAusgabe("Energie -15   ~   Hunger +10   ~   Zufriedenheit +3");
+                Console.ResetColor();
                 Spielmechanik.Ladebalken(175, 175);
                 Bedingungen.VerbrauchEnergie(15);
                 Bedingungen.ErhoeheZufriedenheit(3);
@@ -70,7 +78,11 @@ namespace Haustier_Tamagotchi
             Console.Clear();
             ZeigeTier();
             Console.WriteLine();
-            Spielmechanik.ZentrierteAusgabe($"{tierName} wird gestreichelt.");
+            Spielmechanik.ZentrierteAusgabe($"{tierName} wird von {spielerName} gestreichelt.");
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Spielmechanik.ZentrierteAusgabe("Energie +5   ~   Zufriedenheit +5");
+            Console.ResetColor();
             Spielmechanik.Ladebalken(175, 175);
             Bedingungen.ErhoeheZufriedenheit(5);
             Bedingungen.ErhoeheEnergie(5);
@@ -87,9 +99,13 @@ namespace Haustier_Tamagotchi
                 Spielmechanik.ZentrierteAusgabe($"{spielerName} nutzt ein Klicker um {tierName} Kommandos bei zu bringen.");
                 Console.WriteLine();
                 Spielmechanik.ZentrierteAusgabe($"{tierName} freut sich und lernt fleißig <3");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Spielmechanik.ZentrierteAusgabe("Energie -15   ~   Hunger +10   ~   Zufriedenheit +5");
+                Console.ResetColor();
                 Spielmechanik.Ladebalken(175, 175);
                 Bedingungen.VerbrauchEnergie(15);
-                Bedingungen.ErhoeheZufriedenheit(2);
+                Bedingungen.ErhoeheZufriedenheit(5);
                 Bedingungen.ErhoeheHunger(10);
                 Bedingungen.AktualisiereStatus();
             }
@@ -109,6 +125,10 @@ namespace Haustier_Tamagotchi
             ZeigeTier();
             Console.WriteLine();
             Spielmechanik.ZentrierteAusgabe($"{spielerName} wäscht{tierName} vorsichtig und trocknet ihn ab.");
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Spielmechanik.ZentrierteAusgabe("Gesundheit +10   ~   Zufriedenheit +5");
+            Console.ResetColor();
             Bedingungen.ErhoeheZufriedenheit(5);
             Bedingungen.ErhoeheGesundheit(10);
             Bedingungen.AktualisiereStatus();
@@ -120,6 +140,10 @@ namespace Haustier_Tamagotchi
             ZeigeTier();
             Console.WriteLine();
             Spielmechanik.ZentrierteAusgabe($"{tierName} ruht sich in seinem Käfig aus.");
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Spielmechanik.ZentrierteAusgabe("Gesundheit +10   ~   Zufriedenheit +5");
+            Console.ResetColor();
             Spielmechanik.Ladebalken(500, 1500);
             Bedingungen.ErhoeheEnergie(30);
             Bedingungen.ErhoeheHunger(20);

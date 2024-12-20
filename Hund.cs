@@ -12,7 +12,7 @@ namespace Haustier_Tamagotchi
 
         public override void sagHallo()
         {
-            Spielmechanik.ZentrierteAusgabe($"Wuff! Ich bin {tierName} dein neuer Freund .");
+            Spielmechanik.ZentrierteAusgabe($"Wuff! Ich bin {tierName} dein neuer bester Freund.");
         }
         public override string[] Aktivitaten()
         {
@@ -28,6 +28,10 @@ namespace Haustier_Tamagotchi
                 Console.WriteLine();
                 Spielmechanik.ZentrierteAusgabe($"{spielerName} wirft ein Ball und {tierName} holt ihn voller Freude .");
                 Spielmechanik.Ladebalken(100, 100);
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Spielmechanik.ZentrierteAusgabe("Energie -5   ~   Hunger +2   ~   Zufriedenheit +3");
+                Console.ResetColor();
                 Bedingungen.VerbrauchEnergie(5);
                 Bedingungen.ErhoeheZufriedenheit(3);
                 Bedingungen.ErhoeheHunger(2);
@@ -50,6 +54,10 @@ namespace Haustier_Tamagotchi
                 ZeigeTier();
                 Console.WriteLine();
                 Spielmechanik.ZentrierteAusgabe($"{spielerName} geht mit {tierName} eine Runde Gassi.");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red; 
+                Spielmechanik.ZentrierteAusgabe("Energie -15   ~   Hunger +10   ~   Zufriedenheit +3");
+                Console.ResetColor();
                 Spielmechanik.Ladebalken(175, 175);
                 Bedingungen.VerbrauchEnergie(15);
                 Bedingungen.ErhoeheZufriedenheit(3);
@@ -71,6 +79,10 @@ namespace Haustier_Tamagotchi
             ZeigeTier();
             Console.WriteLine();
             Spielmechanik.ZentrierteAusgabe($"{spielerName} streichelt {tierName} Liebevoll.");
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Spielmechanik.ZentrierteAusgabe("Energie +5   ~   Zufriedenheit +5");
+            Console.ResetColor();
             Spielmechanik.Ladebalken(175, 175);
             Bedingungen.ErhoeheZufriedenheit(5);
             Bedingungen.ErhoeheEnergie(5);
@@ -85,9 +97,13 @@ namespace Haustier_Tamagotchi
                 ZeigeTier();
                 Console.WriteLine();
                 Spielmechanik.ZentrierteAusgabe($"{spielerName} trainiert mit {tierName} im Park.");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Spielmechanik.ZentrierteAusgabe("Energie -15   ~   Hunger +10   ~   Zufriedenheit +5");
+                Console.ResetColor();
                 Spielmechanik.Ladebalken(175, 175);
                 Bedingungen.VerbrauchEnergie(15);
-                Bedingungen.ErhoeheZufriedenheit(2);
+                Bedingungen.ErhoeheZufriedenheit(5);
                 Bedingungen.ErhoeheHunger(10);
                 Bedingungen.AktualisiereStatus();
             }
@@ -109,6 +125,10 @@ namespace Haustier_Tamagotchi
             Spielmechanik.ZentrierteAusgabe($"{spielerName} wäscht {tierName} und pflegt ihn.");
             Console.WriteLine();
             Spielmechanik.ZentrierteAusgabe($"{tierName} freut sich sehr das {spielerName} ihn umsorgt <3");
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Spielmechanik.ZentrierteAusgabe("Gesundheit +10   ~   Zufriedenheit +5");
+            Console.ResetColor();
             Bedingungen.ErhoeheZufriedenheit(5);
             Bedingungen.ErhoeheGesundheit(10);
             Bedingungen.AktualisiereStatus();
@@ -120,6 +140,10 @@ namespace Haustier_Tamagotchi
             ZeigeTier();
             Console.WriteLine();
             Spielmechanik.ZentrierteAusgabe($"{tierName} schläft eine Runde in seinem Körbchen.");
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Spielmechanik.ZentrierteAusgabe("Gesundheit +10   ~   Zufriedenheit +5");
+            Console.ResetColor();
             Spielmechanik.Ladebalken(500, 1500);
             Bedingungen.ErhoeheEnergie(30);
             Bedingungen.ErhoeheHunger(20);

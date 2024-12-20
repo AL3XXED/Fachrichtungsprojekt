@@ -48,3 +48,6 @@ Probleme: Passende Bilder finden, CorserPosotion setzetn so das dass Bild mittig
 Tag 7
 -Programm auskommentieren und Verbesserungen einfügen => Ausgabe in der Console optiemieren
 -Kindklassen fertig gestellt
+-Klasse Bedingungen überarbeitet, fertiggestellt und auskommentiert
+
+Probleme: In der Bedingungsklasse den Überblick verloren,
